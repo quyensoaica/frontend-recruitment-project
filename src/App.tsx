@@ -1,9 +1,9 @@
-import { Button } from "antd";
+import AppRoute from "./routes";
 
 function App() {
   return (
     <>
-      <Button type='primary'>Click me</Button>
+      <AppRoute />
     </>
   );
 }
