@@ -1,7 +1,7 @@
-import { ConfigProvider } from "antd";
+import { ConfigProvider, theme } from "antd";
 
 const CustomTheme = ({ children }: { children: JSX.Element }): JSX.Element => {
-  const theme = {
+  const customeTheme = {
     token: {
       // Seed Token
       colorPrimary: "#00b96b",
@@ -10,8 +10,9 @@ const CustomTheme = ({ children }: { children: JSX.Element }): JSX.Element => {
       // Alias Token
       colorBgContainer: "#f6ffed",
     },
+    // algorithm: theme.darkAlgorithm,
   };
-  return <ConfigProvider theme={theme}>{children}</ConfigProvider>;
+  return <ConfigProvider theme={customeTheme}>{children}</ConfigProvider>;
 };
 
 export default CustomTheme;
