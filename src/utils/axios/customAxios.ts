@@ -1,7 +1,8 @@
 import axios from "axios";
 import getAccessToken from "../Functions/getAccessToken";
+import Environment from "@/constants/env";
 // import { IAppResponseBase } from '~/baseTypes';
-const baseURL = process.env.REACT_APP_API_URL ?? "http://localhost:5555";
+const baseURL = String(Environment.BACKEND_URL);
 const http = axios.create({
   baseURL,
   timeout: 5000,
@@ -22,7 +23,7 @@ http.interceptors.response.use(
   },
   async (error) => {
     if (error.response?.status === 401) {
-      window.location.href = "/login";
+      // window.location.href = "/login";
     }
     return await Promise.reject(error);
   }

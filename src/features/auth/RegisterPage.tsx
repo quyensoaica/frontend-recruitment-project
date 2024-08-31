@@ -8,7 +8,7 @@ const cx = classNames.bind(style);
 const RegisterPageComponent = () => {
   return (
     <div className={cx("register-wrapper")}>
-      <Row className='full-height' align={"stretch"}>
+      <Row className={cx("full-height", "register-box")} align={"stretch"}>
         <Col span={15}>
           <div className={cx("register-left-box")}>
             <RegisterForm />

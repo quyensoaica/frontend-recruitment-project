@@ -1,9 +1,14 @@
-import { Button, Checkbox, Col, Form, Input, Row } from "antd";
+import { Button, Checkbox, Col, Form, FormProps, Input, Row } from "antd";
 import { IoLogoGoogleplus } from "react-icons/io";
 import style from "../auth.module.scss";
 import classNames from "classnames/bind";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ROUTE_PATH from "@/routes/routePath";
+import { toast } from "react-toastify";
+import authService from "@/services/authService";
+import { ILoginRequestData } from "@/types/auth/LoginType";
+import { AxiosError } from "axios";
+import React from "react";
 const cx = classNames.bind(style);
 
 type FieldType = {
@@ -12,12 +17,38 @@ type FieldType = {
 };
 
 const LoginForm = () => {
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const onFinish: FormProps<FieldType>["onFinish"] = async (values: FieldType) => {
+    if (!values.username || !values.password) {
+      toast.error("Vui lòng điền đầy đủ thông tin để đăng nhập!");
+      return;
+    }
+    setIsLoading(true);
+    try {
+      const loginData: ILoginRequestData = {
+        email: values.username,
+        password: values.password,
+        isRememberMe: true,
+      };
+      const res = await authService.login(loginData);
+      if (res.success) {
+        toast.success("Đăng nhập thành công!");
+        navigate(ROUTE_PATH.HOME);
+      }
+      setIsLoading(false);
+    } catch (error: AxiosError | any) {
+      console.log(error);
+      setIsLoading(false);
+      toast.error(error.response?.data.errorMessage);
+    }
+  };
   return (
     <div className={cx("login-form-wrapper")}>
       <h4 className={cx("title")}>Đăng nhập tài khoản</h4>
-      <Form name='basic' initialValues={{ remember: true }} autoComplete='off'>
+      <Form name='basic' initialValues={{ remember: true }} autoComplete='off' onFinish={onFinish}>
         <Form.Item<FieldType> name='username' rules={[{ required: true, message: "Vui lòng điền email để đăng nhập!" }]}>
-          <Input size='large' placeholder='Email' className='full-width' />
+          <Input autoFocus size='large' placeholder='Email' className='full-width' />
         </Form.Item>
 
         <Form.Item<FieldType> className='mt-30' name='password' rules={[{ required: true, message: "Vui lòng điền mật khẩu để đăng nhập!" }]}>
@@ -36,7 +67,7 @@ const LoginForm = () => {
         </Row>
 
         <Form.Item className='mt-30'>
-          <Button type='primary' htmlType='submit' className='full-width' size='large'>
+          <Button loading={isLoading} type='primary' htmlType='submit' className='full-width' size='large'>
             Đăng nhập
           </Button>
         </Form.Item>
