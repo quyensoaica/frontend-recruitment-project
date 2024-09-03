@@ -6,14 +6,18 @@ import RegisterPage from "@/pages/auth/RegisterPage";
 import HomePage from "@/pages/home/HomePage";
 import AuthRoute from "./AuthRoute";
 import AdminProtectRoute from "./AdminRoute";
+import MainLayout from "@/layouts/MainLayout";
+import AdminDashboard from "@/pages/admin/AdminDashboard";
 
 const AppRoute = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<ProtectRoute />}>
-          <Route element={<AdminProtectRoute />}>
-            <Route path={ROUTE_PATH.ADMIN_DASHBOARD} element={<span>ADMIN_DASHBOARD</span>} />
+          <Route element={<MainLayout />}>
+            <Route element={<AdminProtectRoute />}>
+              <Route path={ROUTE_PATH.ADMIN_DASHBOARD} element={<AdminDashboard />} />
+            </Route>
           </Route>
         </Route>
         <Route element={<AuthRoute />}>
