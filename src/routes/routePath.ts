@@ -7,6 +7,6 @@ enum ROUTE_PATH {
   FORGET_PASSWORD = "/account/forget-password",
   RESET_PASSWORD = "/account/reset-password",
   ADMIN_DASHBOARD = "/admin/dashboard",
-  ADMIN_USERS = "/admin/users",
+  ADMIN_USERS = "/admin/users/all-users",
 }
 export default ROUTE_PATH;
