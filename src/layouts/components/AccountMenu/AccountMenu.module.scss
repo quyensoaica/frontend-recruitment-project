@@ -1,5 +1,7 @@
 .account-menu-wrapper {
   min-width: 270px;
+  max-height: calc(100vh - 100px);
+  overflow: auto;
 
   .user-info {
     display: flex;

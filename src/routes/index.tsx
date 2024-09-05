@@ -8,6 +8,7 @@ import AuthRoute from "./AuthRoute";
 import AdminProtectRoute from "./AdminRoute";
 import MainLayout from "@/layouts/MainLayout";
 import AdminDashboard from "@/pages/admin/AdminDashboard";
+import ManageUserPage from "@/pages/admin/manage-user/ManageUserPage";
 
 const AppRoute = () => {
   return (
@@ -17,6 +18,7 @@ const AppRoute = () => {
           <Route element={<MainLayout />}>
             <Route element={<AdminProtectRoute />}>
               <Route path={ROUTE_PATH.ADMIN_DASHBOARD} element={<AdminDashboard />} />
+              <Route path={ROUTE_PATH.ADMIN_USERS} element={<ManageUserPage />} />
             </Route>
           </Route>
         </Route>

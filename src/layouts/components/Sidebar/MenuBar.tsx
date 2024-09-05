@@ -3,6 +3,8 @@ import type { MenuProps } from "antd";
 import { Menu } from "antd";
 import style from "./Sidebar.module.scss";
 import classNames from "classnames/bind";
+import { Link } from "react-router-dom";
+import ROUTE_PATH from "@/routes/routePath";
 const cx = classNames.bind(style);
 
 type MenuItem = Required<MenuProps>["items"][number];
@@ -32,7 +34,7 @@ const items: MenuItem[] = [
     label: "Quản lý người dùng",
     children: [
       { key: "3.1", label: "Phân quyền người dùng" },
-      { key: "3.2", label: "Danh sách người dùng" },
+      { key: "3.2", label: <Link to={ROUTE_PATH.ADMIN_USERS}>Quản lý người dùng</Link> },
     ],
   },
   {

@@ -9,6 +9,8 @@ import authService from "@/services/authService";
 import { ILoginRequestData } from "@/types/auth/LoginType";
 import { AxiosError } from "axios";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { authAction } from "@/stores/authStore/authReducer";
 const cx = classNames.bind(style);
 
 type FieldType = {
@@ -19,6 +21,7 @@ type FieldType = {
 const LoginForm = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const dispatch = useDispatch();
   const onFinish: FormProps<FieldType>["onFinish"] = async (values: FieldType) => {
     if (!values.username || !values.password) {
       toast.error("Vui lòng điền đầy đủ thông tin để đăng nhập!");
@@ -34,6 +37,7 @@ const LoginForm = () => {
       const res = await authService.login(loginData);
       if (res.success) {
         toast.success("Đăng nhập thành công!");
+        dispatch<any>(authAction.getCurrentUser());
         navigate(ROUTE_PATH.HOME);
       }
       setIsLoading(false);
@@ -43,6 +47,7 @@ const LoginForm = () => {
       toast.error(error.response?.data.errorMessage);
     }
   };
+
   return (
     <div className={cx("login-form-wrapper")}>
       <h4 className={cx("title")}>Đăng nhập tài khoản</h4>
