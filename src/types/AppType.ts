@@ -16,3 +16,16 @@ export interface IErrorResponse {
   };
   errorMessage: string;
 }
+
+export interface IGetDataResponse {
+  limit?: number;
+  page?: number;
+  totalPage?: number;
+  totalItem?: number;
+}
+
+export interface IFilterPayload {
+  page?: number;
+  limit?: number;
+  search?: string;
+}

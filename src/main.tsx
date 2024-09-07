@@ -6,13 +6,16 @@ import CustomTheme from "@/providers/ThemeProvider/CustomTheme";
 import { Provider } from "react-redux";
 import { store } from "./stores";
 import GetCurrentUserProvider from "./providers/GetCurrentUserProvider";
+import GetAppVariableProvider from "./providers/GetAppVariableProvider";
 
 createRoot(document.getElementById("root")!).render(
   // <StrictMode>
   <CustomTheme>
     <Provider store={store}>
       <GetCurrentUserProvider>
-        <App />
+        <GetAppVariableProvider>
+          <App />
+        </GetAppVariableProvider>
       </GetCurrentUserProvider>
     </Provider>
   </CustomTheme>

@@ -24,7 +24,7 @@ const MainLayout: React.FC = () => {
           <Sidebar collapsed={collapsed} />
         </div>
         <div
-          className={cx("content", {
+          className={cx("content", "scrollbar", {
             close: collapsed,
           })}
         >
