@@ -6,6 +6,7 @@ import { Avatar, Badge, Dropdown, MenuProps, Popover } from "antd";
 import AccountMenu from "../AccountMenu";
 import HeaderNotify from "../HeaderNotify";
 import HeaderMessage from "../HeaderMessage";
+import HeaderMenu from "./HeaderMenu";
 const cx = classNames.bind(style);
 
 const CandidateHeader = () => {
@@ -13,8 +14,13 @@ const CandidateHeader = () => {
     <div className={cx("header-wrapper")}>
       <div className={cx("header")}>
         <div className={cx("header-leftbox")}>
-          <img className={cx("logo")} src='/src/assets/logo-full.png' alt='logo' />
-          <div className={cx("arrow")}></div>
+          <div className={cx("logo-box")}>
+            <img className={cx("logo")} src='/src/assets/logo-full.png' alt='logo' />
+            <div className={cx("arrow")}></div>
+          </div>
+          <div className={cx("menu-box")}>
+            <HeaderMenu />
+          </div>
         </div>
         <div className={cx("header-rightbox")}>
           <Popover trigger={"click"} placement='bottom' content={<HeaderNotify />}>
