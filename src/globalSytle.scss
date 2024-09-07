@@ -69,6 +69,10 @@
 .d-inline {
   display: inline;
 }
+.table-centered td,
+.table-centered th {
+  vertical-align: middle;
+}
 
 // custom antd theme
 .ant-modal-content {

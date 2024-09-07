@@ -9,6 +9,7 @@ import AdminProtectRoute from "./AdminRoute";
 import MainLayout from "@/layouts/MainLayout";
 import AdminDashboard from "@/pages/admin/AdminDashboard";
 import ManageUserPage from "@/pages/admin/manage-user/ManageUserPage";
+import ManageRolePage from "@/pages/admin/manage-user/ManageRolePage";
 
 const AppRoute = () => {
   return (
@@ -19,6 +20,7 @@ const AppRoute = () => {
             <Route element={<AdminProtectRoute />}>
               <Route path={ROUTE_PATH.ADMIN_DASHBOARD} element={<AdminDashboard />} />
               <Route path={ROUTE_PATH.ADMIN_USERS} element={<ManageUserPage />} />
+              <Route path={ROUTE_PATH.ADMIN_ROLES} element={<ManageRolePage />} />
             </Route>
           </Route>
         </Route>

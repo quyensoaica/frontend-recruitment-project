@@ -20,7 +20,7 @@ const AdminHeader = ({ toggleCollapsed }: IAdminHeaderProps) => {
           <span className={cx("button")} onClick={toggleCollapsed}>
             <BsTextIndentLeft />
           </span>
-          <img className={cx("logo")} src='/src/assets/logo.png' alt='logo' />
+          <img className={cx("logo")} src='/src/assets/logo-full.png' alt='logo' />
           <div className={cx("arrow")}></div>
         </div>
         <div className={cx("header-rightbox")}>
