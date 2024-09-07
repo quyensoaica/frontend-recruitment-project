@@ -10,6 +10,11 @@ import MainLayout from "@/layouts/MainLayout";
 import AdminDashboard from "@/pages/admin/AdminDashboard";
 import ManageUserPage from "@/pages/admin/manage-user/ManageUserPage";
 import ManageRolePage from "@/pages/admin/manage-user/ManageRolePage";
+import ManageProfessionPage from "@/pages/admin/manage-general/ManageProfessionPage";
+import ManageExperiencePage from "@/pages/admin/manage-general/ManageExperiencePage";
+import ManageJobLocationPage from "@/pages/admin/manage-general/ManageJobLocationPage";
+import ManagePositionPage from "@/pages/admin/manage-general/ManagePositionPage";
+import CandidateLayout from "@/layouts/CandidateLayout";
 
 const AppRoute = () => {
   return (
@@ -21,6 +26,11 @@ const AppRoute = () => {
               <Route path={ROUTE_PATH.ADMIN_DASHBOARD} element={<AdminDashboard />} />
               <Route path={ROUTE_PATH.ADMIN_USERS} element={<ManageUserPage />} />
               <Route path={ROUTE_PATH.ADMIN_ROLES} element={<ManageRolePage />} />
+              <Route path={ROUTE_PATH.ADMIN_PROFESSIONS} element={<ManageProfessionPage />} />
+              <Route path={ROUTE_PATH.ADMIN_EXPERIENCES} element={<ManageExperiencePage />} />
+              <Route path={ROUTE_PATH.ADMIN_JOB_LOCATIONS} element={<ManageJobLocationPage />} />
+              <Route path={ROUTE_PATH.ADMIN_POSITIONS} element={<ManagePositionPage />} />
+              <Route path={ROUTE_PATH.ADMIN_SALARY_RANGES} element={<ManagePositionPage />} />
             </Route>
           </Route>
         </Route>
@@ -28,8 +38,10 @@ const AppRoute = () => {
           <Route path={ROUTE_PATH.LOGIN} element={<LoginPage />} />
           <Route path={ROUTE_PATH.REGISTER} element={<RegisterPage />} />
         </Route>
-        <Route path={ROUTE_PATH.HOME} element={<HomePage />} />
-        <Route path={ROUTE_PATH.ABOUT} element={<span>About</span>} />
+        <Route element={<CandidateLayout />}>
+          <Route path={ROUTE_PATH.HOME} element={<HomePage />} />
+          <Route path={ROUTE_PATH.ABOUT} element={<span>About</span>} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

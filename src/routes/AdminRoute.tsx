@@ -20,7 +20,7 @@ const AdminProtectRoute = (): JSX.Element => {
   React.useEffect(() => {
     if (decodedToken.roleName !== "admin") {
       toast.info("Bạn không có quyền truy cập vào trang này!");
-      navigate(-1);
+      navigate(ROUTE_PATH.HOME);
     }
   }, [decodedToken]);
   return <Outlet />;
