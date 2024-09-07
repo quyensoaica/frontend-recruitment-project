@@ -9,5 +9,10 @@ enum ROUTE_PATH {
   ADMIN_DASHBOARD = "/admin/dashboard",
   ADMIN_USERS = "/admin/users/manage-users",
   ADMIN_ROLES = "/admin/roles/manage-roles",
+  ADMIN_PROFESSIONS = "/admin/generals/manage-professions",
+  ADMIN_EXPERIENCES = "/admin/generals/manage-experiences",
+  ADMIN_JOB_LOCATIONS = "/admin/generals/manage-job-locations",
+  ADMIN_POSITIONS = "/admin/generals/manage-positions",
+  ADMIN_SALARY_RANGES = "/admin/generals/manage-salary-ranges",
 }
 export default ROUTE_PATH;

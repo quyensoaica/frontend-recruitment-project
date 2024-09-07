@@ -20,12 +20,11 @@ const items: MenuItem[] = [
     icon: <ContainerOutlined />,
     label: "Quản lý chung",
     children: [
-      { key: "2.1", label: "Ngành nghề tuyển dụng" },
-      { key: "2.2", label: "Vị trí tuyển dụng" },
-      { key: "2.3", label: "Kinh nghiệm làm việc" },
-      { key: "2.4", label: "Mức lương" },
-      { key: "2.5", label: "Vị trí tuyển dụng" },
-      { key: "2.6", label: "Địa điểm làm việc" },
+      { key: "2.1", label: <Link to={ROUTE_PATH.ADMIN_PROFESSIONS}>Ngành nghề tuyển dụng</Link> },
+      { key: "2.2", label: <Link to={ROUTE_PATH.ADMIN_POSITIONS}>Vị trí tuyển dụng</Link> },
+      { key: "2.3", label: <Link to={ROUTE_PATH.ADMIN_EXPERIENCES}>Kinh nghiệm làm việc</Link> },
+      { key: "2.4", label: <Link to={ROUTE_PATH.ADMIN_SALARY_RANGES}>Mức lương</Link> },
+      { key: "2.6", label: <Link to={ROUTE_PATH.ADMIN_JOB_LOCATIONS}>Địa điểm làm việc</Link> },
     ],
   },
   {
