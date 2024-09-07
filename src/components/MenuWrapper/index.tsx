@@ -1,9 +1,10 @@
+import React from "react";
 import style from "./MenuWrapper.module.scss";
 import classNames from "classnames/bind";
 const cx = classNames.bind(style);
 
 interface IMenuWrapperProps {
-  children: JSX.Element;
+  children: React.ReactNode;
   showHeader?: boolean;
   headerTitle?: string;
 }
