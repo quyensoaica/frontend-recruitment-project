@@ -12,6 +12,7 @@ import ButtonUpdate from "@/components/Button/ButtonUpdate";
 import ButtonDelete from "@/components/Button/ButtonDelete";
 import ButtonLock from "@/components/Button/ButtonLock";
 import ButtonShow from "@/components/Button/ButtonShow";
+import { useLocation } from "react-router-dom";
 const cx = classNames.bind(style);
 
 interface DataType extends IUserData {
@@ -20,11 +21,15 @@ interface DataType extends IUserData {
 
 const TableUser: React.FC = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
   const [data, setData] = React.useState<DataType[]>([]);
+  const queryParams = new URLSearchParams(location.search);
+  const page = parseInt(queryParams.get("page") || "1", 10);
+  const limit = parseInt(queryParams.get("limit") || "10", 10);
   const { listUser } = useSelector((state: RootState) => state.userStore);
   useEffect(() => {
-    dispatch<any>(UserActions.getAllUsers({ page: 1, limit: 10 }));
-  }, []);
+    dispatch<any>(UserActions.getAllUsers({ page: Number(page), limit: Number(limit) }));
+  }, [page]);
 
   const onConfirmDelete = (id: string) => {
     dispatch<any>(UserActions.deleteUser(id));
@@ -33,7 +38,7 @@ const TableUser: React.FC = () => {
   const columns: TableColumnsType<DataType> = [
     {
       title: "STT",
-      width: 30,
+      width: 20,
       render: (_, __, index) => index + 1,
       fixed: "left",
       align: "center",
@@ -41,6 +46,7 @@ const TableUser: React.FC = () => {
     {
       title: "Thông tin người dùng",
       width: 100,
+      fixed: "left",
       render: (_, record) => {
         return (
           <div className={cx("user-box")}>
@@ -105,7 +111,17 @@ const TableUser: React.FC = () => {
       );
     }
   }, [listUser]);
-  return <Table columns={columns} key={"id"} virtual dataSource={data} scroll={{ x: 1300, y: 400 }} pagination={false} />;
+  return (
+    <Table
+      className='table-centered '
+      columns={columns}
+      key={"id"}
+      virtual
+      dataSource={data}
+      scroll={{ x: 1300, y: 400 }}
+      pagination={false}
+    />
+  );
 };
 
 export default TableUser;
