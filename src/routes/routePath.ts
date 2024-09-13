@@ -14,5 +14,7 @@ enum ROUTE_PATH {
   ADMIN_JOB_LOCATIONS = "/admin/generals/manage-job-locations",
   ADMIN_POSITIONS = "/admin/generals/manage-positions",
   ADMIN_SALARY_RANGES = "/admin/generals/manage-salary-ranges",
+
+  REGISTER_RECRUITMENT = "/company/register-recruitment",
 }
 export default ROUTE_PATH;
