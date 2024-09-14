@@ -1,15 +1,10 @@
-import { AppstoreOutlined, ContainerOutlined, DesktopOutlined, MailOutlined, PieChartOutlined } from "@ant-design/icons";
-import type { MenuProps } from "antd";
-import { Menu } from "antd";
-import style from "./Sidebar.module.scss";
-import classNames from "classnames/bind";
-import { Link, Route } from "react-router-dom";
 import ROUTE_PATH from "@/routes/routePath";
-const cx = classNames.bind(style);
-
+import { AppstoreOutlined, ContainerOutlined, DesktopOutlined, MailOutlined, PieChartOutlined } from "@ant-design/icons";
+import { MenuProps } from "antd";
+import { Link } from "react-router-dom";
 type MenuItem = Required<MenuProps>["items"][number];
 
-const items: MenuItem[] = [
+const recruiterMenu: MenuItem[] = [
   {
     key: "1",
     icon: <PieChartOutlined />,
@@ -63,24 +58,4 @@ const items: MenuItem[] = [
     icon: <AppstoreOutlined />,
   },
 ];
-
-interface IMenuBarProps {
-  collapsed: boolean;
-}
-
-const MenuBar = ({ collapsed }: IMenuBarProps): JSX.Element => {
-  return (
-    <div className={cx("menu", "scrollbar")}>
-      <Menu
-        defaultSelectedKeys={["1"]}
-        defaultOpenKeys={["1"]}
-        mode='inline'
-        theme='light'
-        inlineCollapsed={collapsed}
-        items={items}
-      />
-    </div>
-  );
-};
-
-export default MenuBar;
+export default recruiterMenu;

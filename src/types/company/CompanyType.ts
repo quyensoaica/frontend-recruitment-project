@@ -11,6 +11,7 @@ export interface IRegisterCompany {
   provinceId: string;
   companyAddress: string;
   companyIntroduce?: string;
+  companyDescription?: string;
   companyLogo?: string;
   companyBanner?: string;
   memberCountId: string;
@@ -26,6 +27,7 @@ export interface ICompany {
   companyIntroduce?: string;
   companyLogo?: string;
   companyBanner?: string;
+  companyDescription?: string;
   memberCount: IMemberCount;
   province: IProvince;
   status: number;

@@ -6,6 +6,8 @@ enum ROUTE_PATH {
   REGISTER = "/account/register",
   FORGET_PASSWORD = "/account/forget-password",
   RESET_PASSWORD = "/account/reset-password",
+
+  //admin routes
   ADMIN_DASHBOARD = "/admin/dashboard",
   ADMIN_USERS = "/admin/users/manage-users",
   ADMIN_ROLES = "/admin/roles/manage-roles",
@@ -14,6 +16,11 @@ enum ROUTE_PATH {
   ADMIN_JOB_LOCATIONS = "/admin/generals/manage-job-locations",
   ADMIN_POSITIONS = "/admin/generals/manage-positions",
   ADMIN_SALARY_RANGES = "/admin/generals/manage-salary-ranges",
+  ADMIN_MANAGE_COMPANY = "/admin/manage-company",
+
+  // manager routes
+  MANAGER_DASHBOARD = "/manager/dashboard",
+  MANAGER_COMPANY = "/manager/company",
 
   REGISTER_RECRUITMENT = "/company/register-recruitment",
 }
