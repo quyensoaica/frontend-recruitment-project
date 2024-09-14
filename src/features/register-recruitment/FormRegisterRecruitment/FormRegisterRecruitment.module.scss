@@ -1,6 +1,5 @@
 .form-wrapper {
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding: 50px 10px;
   background-color: var(--primary-bg-color);
   .title {
     font-size: 4rem;
@@ -90,6 +89,43 @@
           }
         }
       }
+    }
+  }
+
+  .feedback-box {
+    width: 100%;
+    max-width: 700px;
+    border: 1px solid var(--primary-color);
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+
+    .registered {
+      font-size: 2rem;
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+
+    .reject {
+      .description {
+        font-size: 2rem;
+        color: rgb(241, 47, 47);
+        font-weight: 600;
+      }
+    }
+
+    .approve {
+      .description {
+        font-size: 2rem;
+        color: rgb(0, 230, 64);
+        font-weight: 600;
+      }
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 10px;
     }
   }
 }

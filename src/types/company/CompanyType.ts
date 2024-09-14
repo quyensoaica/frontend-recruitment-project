@@ -28,8 +28,8 @@ export interface ICompany {
   companyBanner?: string;
   memberCount: IMemberCount;
   province: IProvince;
+  status: number;
   isActive: boolean;
-  isBrowsing: boolean;
   createdAt: string;
   updatedAt: string;
 }

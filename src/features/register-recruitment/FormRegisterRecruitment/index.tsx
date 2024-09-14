@@ -1,5 +1,5 @@
 import { Avatar, Button, Col, Form, Input, Row, Select } from "antd";
-import { BiCamera } from "react-icons/bi";
+import { BiCamera, BiRightArrowAlt } from "react-icons/bi";
 import style from "./FormRegisterRecruitment.module.scss";
 import classNames from "classnames/bind";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,23 +9,32 @@ import { ISelectOption } from "@/types/AppType";
 import { IRegisterCompany } from "@/types/company/CompanyType";
 import { CompanyActions } from "@/stores/companyStore/companyReducer";
 import TextEditor from "@/components/TextEditor";
+import { toast } from "react-toastify";
 const cx = classNames.bind(style);
 const FormRegisterRecruitment = () => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const { provinces, memberCounts } = useSelector((state: RootState) => state.generalStore);
   const { isSubmitting, myCompany } = useSelector((state: RootState) => state.companyStore);
-  const [companyIntroduce, setCompanyIntroduce] = useState<string>("<p>hello</p>");
+  const [provinceOptions, setProvinceOptions] = useState<ISelectOption[]>([]);
+  const [memberCountOptions, setMemberCountOptions] = useState<ISelectOption[]>([]);
+  const [companyIntroduce, setCompanyIntroduce] = useState<string>("");
+  const [disabledForm, setDisabledForm] = useState<boolean>(false);
+  const [formAction, setFormAction] = useState<"register" | "update">("register");
 
   const handleChangeCompanyIntroduce = (value: string) => {
     setCompanyIntroduce(value);
   };
-  console.log(companyIntroduce);
   useEffect(() => {
     dispatch<any>(CompanyActions.getMyCompany());
   }, []);
   useEffect(() => {
-    if (!myCompany) return;
+    if (!myCompany) {
+      setDisabledForm(false);
+      form.resetFields();
+      setCompanyIntroduce("");
+      return;
+    }
     form.setFieldsValue({
       companyName: myCompany.companyName,
       taxCode: myCompany.taxCode,
@@ -36,10 +45,14 @@ const FormRegisterRecruitment = () => {
       companyAddress: myCompany.companyAddress,
       memberCountId: myCompany.memberCount.id,
     });
-    // handleChangeCompanyIntroduce(myCompany.companyIntroduce);
-  }, [myCompany, form]);
+    handleChangeCompanyIntroduce(myCompany.companyIntroduce || "");
+    setDisabledForm(true);
+  }, [myCompany]);
+
+  useEffect(() => {}, [memberCountOptions]);
   const onFinish = async (values: any) => {
     const dataRegister: IRegisterCompany = {
+      id: myCompany?.id,
       companyName: values.companyName,
       companyBanner: "",
       companyLogo: "",
@@ -52,10 +65,19 @@ const FormRegisterRecruitment = () => {
       companyIntroduce: companyIntroduce,
       memberCountId: values.memberCountId,
     };
-    await dispatch<any>(CompanyActions.registerCompanyByRecruiter(dataRegister)).unwrap();
+    if (formAction === "register") {
+      await dispatch<any>(CompanyActions.registerCompanyByRecruiter(dataRegister)).unwrap();
+    } else {
+      await dispatch<any>(CompanyActions.updateCompanyWhenRegister(dataRegister)).unwrap();
+    }
   };
-  const [provinceOptions, setProvinceOptions] = useState<ISelectOption[]>([]);
-  const [memberCountOptions, setMemberCountOptions] = useState<ISelectOption[]>([]);
+
+  const handleUpdateInformation = () => {
+    setFormAction("update");
+    setDisabledForm(false);
+    toast.info("Bạn đã mở khóa form để cập nhật thông tin");
+  };
+
   useEffect(() => {
     if (!provinces || provinces.length === 0) return;
     const options = provinces.map((item) => ({
@@ -63,6 +85,9 @@ const FormRegisterRecruitment = () => {
       label: item.provinceName,
     }));
     setProvinceOptions(options);
+    form.setFieldsValue({
+      provinceId: options[0].value,
+    });
   }, [provinces]);
   useEffect(() => {
     if (!memberCounts || memberCounts.length === 0) return;
@@ -71,6 +96,9 @@ const FormRegisterRecruitment = () => {
       label: item.displayName,
     }));
     setMemberCountOptions(options);
+    form.setFieldsValue({
+      memberCountId: options[0].value,
+    });
   }, [memberCounts]);
   return (
     <div className={cx("form-wrapper")}>
@@ -97,7 +125,7 @@ const FormRegisterRecruitment = () => {
                 </span>
               </div>
             </div>
-            <Form form={form} layout='vertical' onFinish={onFinish} initialValues={{ companyName: "abc" }}>
+            <Form form={form} layout='vertical' onFinish={onFinish} disabled={disabledForm}>
               <Row gutter={[16, 16]}>
                 <Col xs={24} md={24}>
                   <Form.Item
@@ -212,16 +240,58 @@ const FormRegisterRecruitment = () => {
                   </Form.Item>
                 </Col>
                 <Col xs={24}>
-                  <Form.Item name='companyIntroduce' label={<span className='font-weight-500'>Giới thiệu công ty</span>}>
-                    {/* <TextEditor /> */}
-                    <TextEditor value={companyIntroduce} onChange={handleChangeCompanyIntroduce} />
-                  </Form.Item>
+                  <div>
+                    <span className='font-weight-500'>Giới thiệu công ty</span>
+                    <TextEditor disabled={disabledForm} value={companyIntroduce} onChange={handleChangeCompanyIntroduce} />
+                  </div>
                 </Col>
-                <Col xs={24}>
+                {myCompany !== undefined && (
+                  <Col xs={24}>
+                    <div className='d-flex justify-content-center'>
+                      <div className={cx("feedback-box")}>
+                        {myCompany.status === 0 ? (
+                          <span className={cx("registered")}>
+                            Hồ sơ đăng kí của bạn đã được gửi lên hệ thống, <br /> vui lòng chờ quản trị viên kiểm duyệt và xác
+                            nhận
+                          </span>
+                        ) : myCompany.status === 1 ? (
+                          <div className={cx("approve")}>
+                            <span className={cx("description")}>Bạn đã trở thành nhà tuyển dụng!</span>
+                            <Button
+                              type='primary'
+                              disabled={false}
+                              iconPosition='end'
+                              size='large'
+                              icon={
+                                <span className='d-flex align-item-center font-size-2rem'>
+                                  <BiRightArrowAlt />
+                                </span>
+                              }
+                            >
+                              Đến trang tuyển dụng
+                            </Button>
+                          </div>
+                        ) : (
+                          <div className={cx("reject")}>
+                            <span className={cx("description")}>Hồ sơ đăng kí của bạn đã bị từ chối</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </Col>
+                )}
+                <Col xs={24} className='mt-20'>
                   <div className='text-end'>
-                    <Button size='large'>Xem trước</Button>
+                    {myCompany !== undefined && disabledForm && myCompany.status !== 1 && (
+                      <Button onClick={handleUpdateInformation} type='primary' size='large' disabled={false}>
+                        Cập nhật
+                      </Button>
+                    )}
+                    <Button className='ml-10' size='large' disabled={false}>
+                      Xem trước
+                    </Button>
                     <Button className='ml-10' loading={isSubmitting} type='primary' size='large' htmlType='submit'>
-                      Đăng kí ngay
+                      {formAction === "register" ? "Đăng kí ngay" : "Lưu cập nhật"}
                     </Button>
                   </div>
                 </Col>

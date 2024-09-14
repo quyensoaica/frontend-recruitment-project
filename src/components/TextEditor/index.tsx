@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { memo, useMemo, useRef } from "react";
 import JoditEditor from "jodit-react";
 
 const copyStringToClipboard = function (str: any) {
@@ -113,44 +113,44 @@ const buttons = [
   },
 ];
 
-// Cấu hình cho JoditEditor
-const config = {
-  readonly: false,
-  toolbar: true,
-  spellcheck: true,
-  // toolbarButtonSize: "medium",
-  toolbarAdaptive: false,
-  showCharsCounter: true,
-  showWordsCounter: true,
-  showXPathInStatusbar: false,
-  askBeforePasteHTML: true,
-  askBeforePasteFromWord: true,
-  buttons: buttons,
-  uploader: {
-    insertImageAsBase64URI: true,
-  },
-  height: 500,
-};
-
-const TextEditor = ({ value, onChange }: { value: string; onChange: (htmlString: string) => void }): React.ReactNode => {
-  console.log(value);
-
-  // State để lưu giá trị văn bản
-
+const TextEditor = ({
+  value = "",
+  onChange,
+  disabled = false,
+}: {
+  value: string;
+  disabled?: boolean;
+  onChange: (htmlString: string) => void;
+}): JSX.Element => {
+  // Cấu hình cho JoditEditor
+  const config = useMemo(() => {
+    return {
+      readonly: disabled,
+      toolbar: true,
+      spellcheck: true,
+      toolbarAdaptive: false,
+      showCharsCounter: true,
+      showWordsCounter: true,
+      showXPathInStatusbar: false,
+      askBeforePasteHTML: false,
+      askBeforePasteFromWord: false,
+      buttons: buttons,
+      uploader: {
+        insertImageAsBase64URI: true,
+      },
+      height: 500,
+    };
+  }, [disabled]);
   return (
     <div>
       <JoditEditor
         value={value}
         config={config}
-        onBlur={(htmlString: string) => onChange(htmlString)} // Gọi khi thoát khỏi editor
+        onBlur={(htmlString: string) => onChange(htmlString)} // Gọi mỗi khi editor mất focus
         onChange={(htmlString: string) => onChange(htmlString)} // Gọi mỗi khi nội dung thay đổi
       />
-      {/* <div>
-        <h3>Output:</h3>
-        <div dangerouslySetInnerHTML={{ __html: value }} />
-      </div> */}
     </div>
   );
 };
 
-export default TextEditor;
+export default memo(TextEditor);

@@ -12,13 +12,13 @@ const ReasonRegisterRecruitment = () => {
       </div>
       <div className={cx("reason-content")}>
         <div className={cx("reason-item")}>
-          <Row gutter={20} align={"middle"} justify={"center"}>
-            <Col span={6}>
+          <Row align={"middle"} justify={"center"}>
+            <Col xs={24} sm={20} md={8} lg={6}>
               <div className={cx("box-image")}>
                 <img className='full-width' src='/src/assets/register-recruitment-1.webp' alt='reason-1' />
               </div>
             </Col>
-            <Col span={12}>
+            <Col xs={24} sm={24} md={16} lg={12}>
               <div className={cx("box-content")}>
                 <h4 className={cx("title")}>Đề xuất CV ứng viên</h4>
                 <div className={cx("descriptions")}>
@@ -62,8 +62,8 @@ const ReasonRegisterRecruitment = () => {
       </div>
       <div className={cx("reason-content")}>
         <div className={cx("reason-item")}>
-          <Row gutter={20} align={"middle"} justify={"center"}>
-            <Col span={12}>
+          <Row align={"middle"} justify={"center"}>
+            <Col xs={24} sm={24} md={16} lg={12}>
               <div className={cx("box-content")}>
                 <h4 className={cx("title")}>Đăng tin tuyển dụng miễn phí</h4>
                 <div className={cx("descriptions")}>
@@ -102,7 +102,7 @@ const ReasonRegisterRecruitment = () => {
                 </div>
               </div>
             </Col>
-            <Col span={6}>
+            <Col xs={24} sm={20} md={8} lg={6}>
               <div className={cx("box-image")}>
                 <img className='full-width' src='/src/assets/register-recruitment-2.webp' alt='reason-1' />
               </div>
