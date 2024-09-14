@@ -15,6 +15,7 @@ import ManageExperiencePage from "@/pages/admin/manage-general/ManageExperienceP
 import ManageJobLocationPage from "@/pages/admin/manage-general/ManageJobLocationPage";
 import ManagePositionPage from "@/pages/admin/manage-general/ManagePositionPage";
 import CandidateLayout from "@/layouts/CandidateLayout";
+import RegisterRecruitmentPage from "@/pages/company/RegisterRecruitmentPage";
 
 const AppRoute = () => {
   return (
@@ -32,6 +33,10 @@ const AppRoute = () => {
               <Route path={ROUTE_PATH.ADMIN_POSITIONS} element={<ManagePositionPage />} />
               <Route path={ROUTE_PATH.ADMIN_SALARY_RANGES} element={<ManagePositionPage />} />
             </Route>
+          </Route>
+
+          <Route element={<CandidateLayout />}>
+            <Route path={ROUTE_PATH.REGISTER_RECRUITMENT} element={<RegisterRecruitmentPage />} />
           </Route>
         </Route>
         <Route element={<AuthRoute />}>

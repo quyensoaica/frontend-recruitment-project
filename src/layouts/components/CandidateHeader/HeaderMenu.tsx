@@ -38,7 +38,7 @@ const HeaderMenu = () => {
       children: [
         { title: "Danh sách công ty", icon: <BiSearchAlt2 /> },
         { title: "Top công ty tuyển dụng", icon: <BiWindowAlt /> },
-        { title: "Đăng kí nhà tuyển dụng", icon: <BiWindowAlt /> },
+        { title: "Đăng kí nhà tuyển dụng", icon: <BiWindowAlt />, link: ROUTE_PATH.REGISTER_RECRUITMENT },
       ],
     },
     {
@@ -65,10 +65,10 @@ const HeaderMenu = () => {
                 <div className={cx("menu-children-wrapper")}>
                   {item.children.map((child, index) => {
                     return (
-                      <div className={cx("menu-children")} key={index}>
+                      <Link to={child.link || ""} className={cx("menu-children")} key={index}>
                         <div className={cx("menu-children-icon")}>{child.icon}</div>
                         <div className={cx("menu-children-title")}>{child.title}</div>
-                      </div>
+                      </Link>
                     );
                   })}
                 </div>

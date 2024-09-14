@@ -29,3 +29,8 @@ export interface IFilterPayload {
   limit?: number;
   search?: string;
 }
+
+export interface ISelectOption {
+  value: string;
+  label: string;
+}

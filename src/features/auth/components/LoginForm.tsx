@@ -44,7 +44,7 @@ const LoginForm = () => {
     } catch (error: AxiosError | any) {
       console.log(error);
       setIsLoading(false);
-      toast.error(error.response?.data.errorMessage);
+      toast.error(error.errorMessage);
     }
   };
 
@@ -56,7 +56,11 @@ const LoginForm = () => {
           <Input autoFocus size='large' placeholder='Email' className='full-width' />
         </Form.Item>
 
-        <Form.Item<FieldType> className='mt-30' name='password' rules={[{ required: true, message: "Vui lòng điền mật khẩu để đăng nhập!" }]}>
+        <Form.Item<FieldType>
+          className='mt-30'
+          name='password'
+          rules={[{ required: true, message: "Vui lòng điền mật khẩu để đăng nhập!" }]}
+        >
           <Input.Password placeholder='Password' size='large' className='full-width' />
         </Form.Item>
 
