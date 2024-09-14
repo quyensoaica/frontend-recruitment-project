@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 const cx = classNames.bind(style);
 const FormRegisterRecruitment = () => {
   const [form] = Form.useForm();
+  const { TextArea } = Input;
   const dispatch = useDispatch();
   const { provinces, memberCounts } = useSelector((state: RootState) => state.generalStore);
   const { isSubmitting, myCompany } = useSelector((state: RootState) => state.companyStore);
@@ -236,6 +237,23 @@ const FormRegisterRecruitment = () => {
                       type='text'
                       className={cx("input")}
                       placeholder='Nhập số điện thoại liên hệ của công ty'
+                    />
+                  </Form.Item>
+                </Col>
+                <Col xs={24}>
+                  <Form.Item
+                    rules={[{ required: true, message: "Mô tả công ty không được để trống" }]}
+                    label={<span className='font-weight-500'>Mô tả ngắn về công ty</span>}
+                    name='companyDescription'
+                  >
+                    <TextArea
+                      variant='filled'
+                      aria-multiline
+                      size='large'
+                      className={cx("input")}
+                      placeholder='Nhập thông tin mô tả về công ty'
+                      maxLength={1000}
+                      rows={5}
                     />
                   </Form.Item>
                 </Col>

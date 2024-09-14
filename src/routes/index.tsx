@@ -5,7 +5,7 @@ import LoginPage from "@/pages/auth/LoginPage";
 import RegisterPage from "@/pages/auth/RegisterPage";
 import HomePage from "@/pages/home/HomePage";
 import AuthRoute from "./AuthRoute";
-import AdminProtectRoute from "./AdminRoute";
+import AdminProtectRoute from "./AdminProtectRoute";
 import MainLayout from "@/layouts/MainLayout";
 import AdminDashboard from "@/pages/admin/AdminDashboard";
 import ManageUserPage from "@/pages/admin/manage-user/ManageUserPage";
@@ -16,6 +16,11 @@ import ManageJobLocationPage from "@/pages/admin/manage-general/ManageJobLocatio
 import ManagePositionPage from "@/pages/admin/manage-general/ManagePositionPage";
 import CandidateLayout from "@/layouts/CandidateLayout";
 import RegisterRecruitmentPage from "@/pages/company/RegisterRecruitmentPage";
+import ManagerLayout from "@/layouts/ManagerLayout";
+import ManagerProtectRoute from "./ManagerProtectRoute";
+import ManageCompanyPage from "@/pages/manager/manager-company/ManagerCompanyPage";
+import ManagerDashboardPage from "@/pages/manager/dashboard/ManagerDashboardPage";
+import ManageCompanyAdminPage from "@/pages/admin/manage-company/ManageCompanyPage";
 
 const AppRoute = () => {
   return (
@@ -24,6 +29,7 @@ const AppRoute = () => {
         <Route element={<ProtectRoute />}>
           <Route element={<MainLayout />}>
             <Route element={<AdminProtectRoute />}>
+              {/* add other route of admin here */}
               <Route path={ROUTE_PATH.ADMIN_DASHBOARD} element={<AdminDashboard />} />
               <Route path={ROUTE_PATH.ADMIN_USERS} element={<ManageUserPage />} />
               <Route path={ROUTE_PATH.ADMIN_ROLES} element={<ManageRolePage />} />
@@ -32,6 +38,15 @@ const AppRoute = () => {
               <Route path={ROUTE_PATH.ADMIN_JOB_LOCATIONS} element={<ManageJobLocationPage />} />
               <Route path={ROUTE_PATH.ADMIN_POSITIONS} element={<ManagePositionPage />} />
               <Route path={ROUTE_PATH.ADMIN_SALARY_RANGES} element={<ManagePositionPage />} />
+              <Route path={ROUTE_PATH.ADMIN_MANAGE_COMPANY} element={<ManageCompanyAdminPage />} />
+            </Route>
+          </Route>
+
+          <Route element={<ManagerLayout />}>
+            <Route element={<ManagerProtectRoute />}>
+              {/* add other route of manager here */}
+              <Route path={ROUTE_PATH.MANAGER_DASHBOARD} element={<ManagerDashboardPage />} />
+              <Route path={ROUTE_PATH.MANAGER_COMPANY} element={<ManageCompanyPage />} />
             </Route>
           </Route>
 
