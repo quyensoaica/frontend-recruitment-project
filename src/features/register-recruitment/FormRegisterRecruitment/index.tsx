@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/stores";
 import { useEffect, useState } from "react";
 import { ISelectOption } from "@/types/AppType";
-import { IRegisterCompany } from "@/types/company/CompanyType";
+import { ICompany, IRegisterCompany } from "@/types/company/CompanyType";
 import { CompanyActions } from "@/stores/companyStore/companyReducer";
 import TextEditor from "@/components/TextEditor";
 import { toast } from "react-toastify";
@@ -26,10 +26,7 @@ const FormRegisterRecruitment = () => {
   const handleChangeCompanyIntroduce = (value: string) => {
     setCompanyIntroduce(value);
   };
-  useEffect(() => {
-    dispatch<any>(CompanyActions.getMyCompany());
-  }, []);
-  useEffect(() => {
+  const handleResetField = () => {
     if (!myCompany) {
       setDisabledForm(false);
       form.resetFields();
@@ -44,10 +41,23 @@ const FormRegisterRecruitment = () => {
       phoneNumber: myCompany.phoneNumber,
       provinceId: myCompany.province.id,
       companyAddress: myCompany.companyAddress,
+      companyDescription: myCompany.companyDescription,
       memberCountId: myCompany.memberCount.id,
     });
     handleChangeCompanyIntroduce(myCompany.companyIntroduce || "");
-    setDisabledForm(true);
+  };
+
+  useEffect(() => {
+    dispatch<any>(CompanyActions.getMyCompany());
+  }, []);
+  useEffect(() => {
+    handleResetField();
+    if (formAction !== "register") {
+      setDisabledForm(true);
+    }
+    if (myCompany?.status === 1) {
+      setDisabledForm(true);
+    }
   }, [myCompany]);
 
   useEffect(() => {}, [memberCountOptions]);
@@ -65,6 +75,7 @@ const FormRegisterRecruitment = () => {
       companyAddress: values.companyAddress,
       companyIntroduce: companyIntroduce,
       memberCountId: values.memberCountId,
+      companyDescription: values.companyDescription,
     };
     if (formAction === "register") {
       await dispatch<any>(CompanyActions.registerCompanyByRecruiter(dataRegister)).unwrap();
@@ -77,6 +88,26 @@ const FormRegisterRecruitment = () => {
     setFormAction("update");
     setDisabledForm(false);
     toast.info("Bạn đã mở khóa form để cập nhật thông tin");
+  };
+
+  const handleOpenModalShowCompany = () => {
+    const formData = form.getFieldsValue();
+    const province = provinces?.find((item) => item.id === formData.provinceId);
+    const memberCount = memberCounts?.find((item) => item.id === formData.memberCountId);
+    const currentData: ICompany = {
+      ...myCompany,
+      ...formData,
+      companyIntroduce,
+      province: province,
+      memberCount: memberCount,
+    };
+    dispatch(CompanyActions.setCurrentCompany(currentData));
+    dispatch(CompanyActions.setOpenModalShowCompany(true));
+  };
+  const handleCancelSave = () => {
+    setDisabledForm(true);
+    handleResetField();
+    toast.info("Bạn đã trở về trạng thái chỉ xem thông tin");
   };
 
   useEffect(() => {
@@ -292,6 +323,8 @@ const FormRegisterRecruitment = () => {
                         ) : (
                           <div className={cx("reject")}>
                             <span className={cx("description")}>Hồ sơ đăng kí của bạn đã bị từ chối</span>
+                            <span>Lý do bị từ chối:</span>
+                            <span>{myCompany.feedbackFromManager}</span>
                           </div>
                         )}
                       </div>
@@ -300,12 +333,19 @@ const FormRegisterRecruitment = () => {
                 )}
                 <Col xs={24} className='mt-20'>
                   <div className='text-end'>
-                    {myCompany !== undefined && disabledForm && myCompany.status !== 1 && (
-                      <Button onClick={handleUpdateInformation} type='primary' size='large' disabled={false}>
-                        Cập nhật
-                      </Button>
-                    )}
-                    <Button className='ml-10' size='large' disabled={false}>
+                    {myCompany !== undefined &&
+                      myCompany.status !== 1 &&
+                      (disabledForm ? (
+                        <Button onClick={handleUpdateInformation} type='primary' size='large' disabled={false}>
+                          Cập nhật
+                        </Button>
+                      ) : (
+                        <Button onClick={handleCancelSave} type='primary' danger size='large' disabled={false}>
+                          Huỷ bỏ
+                        </Button>
+                      ))}
+
+                    <Button onClick={handleOpenModalShowCompany} className='ml-10' size='large' disabled={false}>
                       Xem trước
                     </Button>
                     <Button className='ml-10' loading={isSubmitting} type='primary' size='large' htmlType='submit'>

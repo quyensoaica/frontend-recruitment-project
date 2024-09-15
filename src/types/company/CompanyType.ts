@@ -1,3 +1,4 @@
+import { IGetDataResponse } from "../AppType";
 import { IMemberCount } from "../memberCount/MemberCountType";
 import { IProvince } from "../province/ProvinceType";
 
@@ -28,10 +29,22 @@ export interface ICompany {
   companyLogo?: string;
   companyBanner?: string;
   companyDescription?: string;
+  feedbackFromManager?: string;
   memberCount: IMemberCount;
   province: IProvince;
+  recruiter: {
+    id: string;
+    fullName: string;
+    avatar: string;
+    email: string;
+    groupRoleId: string;
+  };
   status: number;
   isActive: boolean;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface IGetListCompanyResponse extends IGetDataResponse {
+  companies: ICompany[];
 }
