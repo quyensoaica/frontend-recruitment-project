@@ -8,11 +8,15 @@ import ActionBox from "./ActionBox";
 import { useSelector } from "react-redux";
 import { RootState } from "@/stores";
 import PaginationCustom from "@/components/Pagination";
+import ListCompany from "./ListCompany";
+import CompanyInfomationModal from "./Modal/CompanyInfomationModal";
+import ApproveRegisterModal from "./Modal/ApproveRegisterModal";
+import RejectRegisterModal from "./Modal/RejectRegisterModal";
 const cx = classNames.bind(style);
 const ManageCompany = () => {
-  const { totalUser, limit } = useSelector((state: RootState) => state.userStore);
+  const { totalCompany, limit } = useSelector((state: RootState) => state.companyStore);
   return (
-    <CardCustom title='Quản lý người dùng' fullHeight>
+    <CardCustom title='Quản lý công ty' fullHeight>
       <div className={cx("manage-user-wrapper")}>
         <div className={cx("header")}>
           <div className={cx("filter")}>
@@ -23,12 +27,18 @@ const ManageCompany = () => {
           </div>
         </div>
         <div className={cx("body")}>
-          <div className={cx("table-user")}>{/* <TableUser /> */}</div>
+          <div className={cx("table-user")}>
+            <ListCompany />
+          </div>
           <div className='flex justify-content-end'>
-            <PaginationCustom total={totalUser || 0} limit={limit} />
+            <PaginationCustom total={totalCompany || 0} limit={limit} />
           </div>
         </div>
-        <div className={cx("footer")}>{/* <ModalSaveUser /> */}</div>
+        <div className={cx("footer")}>
+          <CompanyInfomationModal />
+          <ApproveRegisterModal />
+          <RejectRegisterModal />
+        </div>
       </div>
     </CardCustom>
   );

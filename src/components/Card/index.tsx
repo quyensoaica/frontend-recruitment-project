@@ -10,13 +10,20 @@ interface ICardProps {
   showFooter?: boolean;
   fullHeight?: boolean;
 }
-const CardCustom = ({ children, title = "Card Header", showHeader = true, cardHeader = null, fullHeight = false }: ICardProps) => {
+const CardCustom = ({
+  children,
+  title = "Card Header",
+  showHeader = true,
+  cardHeader = null,
+  fullHeight = false,
+}: ICardProps) => {
   return (
     <div className={cx("card-wrapper")}>
       {showHeader && cardHeader ? cardHeader : <div className={cx("card-header")}>{title}</div>}
       <div
-        className={cx("card-body", {
+        className={cx("card-body", "scrollbar", {
           "full-height": fullHeight,
+          // scrollbar: fullHeight,
         })}
       >
         {children}
