@@ -5,8 +5,11 @@ import MenuWrapper from "@/components/MenuWrapper";
 import { BiHeart, BiLogoCodepen, BiSearchAlt2, BiWindowAlt } from "react-icons/bi";
 import ROUTE_PATH from "@/routes/routePath";
 import { Link } from "react-router-dom";
+import { RootState } from "@/stores";
+import { useSelector } from "react-redux";
 const cx = classNames.bind(style);
 const HeaderMenu = () => {
+  const { currentUser } = useSelector((state: RootState) => state.authStore);
   const listMenu = [
     {
       title: "Trang chủ",

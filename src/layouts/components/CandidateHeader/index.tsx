@@ -1,15 +1,17 @@
-import { BsTextIndentLeft } from "react-icons/bs";
 import { BiSolidBellRing, BiSolidMessage } from "react-icons/bi";
 import style from "./CandidateHeader.module.scss";
 import classNames from "classnames/bind";
-import { Avatar, Badge, Dropdown, MenuProps, Popover } from "antd";
+import { Avatar, Badge, Popover } from "antd";
 import AccountMenu from "../AccountMenu";
 import HeaderNotify from "../HeaderNotify";
 import HeaderMessage from "../HeaderMessage";
 import HeaderMenu from "./HeaderMenu";
+import { RootState } from "@/stores";
+import { useSelector } from "react-redux";
 const cx = classNames.bind(style);
 
 const CandidateHeader = () => {
+  const { currentUser } = useSelector((state: RootState) => state.authStore);
   return (
     <div className={cx("header-wrapper")}>
       <div className={cx("header")}>
@@ -39,7 +41,7 @@ const CandidateHeader = () => {
           </Popover>
 
           <Popover trigger={"click"} placement='bottomRight' content={<AccountMenu />}>
-            <Avatar className='cursor-pointer' size={"large"}>
+            <Avatar src={currentUser?.avatar ? currentUser.avatar : ""} className='cursor-pointer' size={"large"}>
               U
             </Avatar>
           </Popover>

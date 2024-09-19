@@ -1,3 +1,4 @@
+import GenderStatus from "@/constants/GenderStatus";
 import { IGetDataResponse } from "../AppType";
 
 export interface IUserData {
@@ -25,4 +26,14 @@ export interface ICreateUserPayload {
   groupRoleId: string;
   avatar?: string;
   password: string;
+}
+
+export interface IUpdateProfilePayload {
+  id: string;
+  avatar?: string;
+  banner?: string;
+  fullName: string;
+  birthday: string;
+  gender: GenderStatus;
+  phoneNumber?: string;
 }

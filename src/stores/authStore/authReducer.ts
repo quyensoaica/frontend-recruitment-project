@@ -1,8 +1,9 @@
 import { ICurrentUser } from "@/types/auth/AuthType";
 import getAccessToken from "@/utils/Functions/getAccessToken";
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { authThunks } from "./authThunks";
 import { deleteCookie } from "@/utils/cookies";
+import { toast } from "react-toastify";
 
 export interface AuthState {
   token: string | null;
@@ -10,6 +11,8 @@ export interface AuthState {
   loading: boolean;
   error: string | null;
   currentUser: ICurrentUser | null;
+  isSubmitting: boolean;
+  isOpenModalFirstUpdate: boolean;
 }
 
 const initialState: AuthState = {
@@ -18,6 +21,8 @@ const initialState: AuthState = {
   loading: false,
   error: null,
   currentUser: null,
+  isOpenModalFirstUpdate: false,
+  isSubmitting: false,
 };
 
 export const AuthSlice = createSlice({
@@ -29,6 +34,12 @@ export const AuthSlice = createSlice({
       state.isAuthenticated = false;
       state.currentUser = null;
       deleteCookie("accessToken");
+    },
+    changeIsOpenModalFirstUpdate: (state, action: PayloadAction<boolean>) => {
+      state.isOpenModalFirstUpdate = action.payload;
+    },
+    changeIsSubmitting: (state, action: PayloadAction<boolean>) => {
+      state.isSubmitting = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -44,6 +55,24 @@ export const AuthSlice = createSlice({
       .addCase(authThunks.getCurrentUser.rejected, (state) => {
         state.isAuthenticated = false;
         state.loading = false;
+      });
+
+    builder
+      .addCase(authThunks.firstUpdateProfile.pending, (state) => {
+        state.loading = true;
+        state.isSubmitting = true;
+      })
+      .addCase(authThunks.firstUpdateProfile.fulfilled, (state, action) => {
+        state.currentUser = action.payload.data;
+        state.loading = false;
+        state.isOpenModalFirstUpdate = false;
+        state.isSubmitting = false;
+        toast.success("Update profile successfully");
+      })
+      .addCase(authThunks.firstUpdateProfile.rejected, (state, action: PayloadAction<any>) => {
+        state.loading = false;
+        state.isSubmitting = false;
+        toast.error(action.payload.errorMessage);
       });
   },
 });

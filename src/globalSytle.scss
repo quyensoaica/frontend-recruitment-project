@@ -57,7 +57,7 @@
 }
 
 .d-flex {
-  display: flex;
+  display: flex !important;
 }
 .flex-column {
   flex-direction: column;
@@ -78,13 +78,13 @@
   align-items: flex-end;
 }
 .d-block {
-  display: block;
+  display: block !important;
 }
 .d-none {
-  display: none;
+  display: none !important;
 }
 .d-inline {
-  display: inline;
+  display: inline !important;
 }
 .table-centered td,
 .table-centered th {

@@ -7,6 +7,8 @@ interface ModalCustomProps {
   onOK?: () => void;
   onCancel: () => void;
   modalTitle?: string;
+  confirmTitle?: string;
+  cancelTitle?: string;
   showHeader?: boolean;
   customHeader?: React.ReactNode;
   showFooter?: boolean;
@@ -16,6 +18,7 @@ interface ModalCustomProps {
   width?: number | string;
   scrollBody?: boolean;
   isLoading?: boolean;
+  maskClosable?: boolean;
 }
 
 const ModalCustom = ({
@@ -23,6 +26,8 @@ const ModalCustom = ({
   onCancel,
   onOK,
   modalTitle = "Truyền modalTitle vào nè",
+  confirmTitle = "OK",
+  cancelTitle = "Cancel",
   children,
   showHeader = true,
   customHeader = null,
@@ -32,9 +37,19 @@ const ModalCustom = ({
   scrollBody = false,
   width = 1200,
   isLoading = false,
+  maskClosable = true,
 }: ModalCustomProps) => {
   return (
-    <Modal centered width={width} open={open} closeIcon={showCloseButton} onOk={onOK} onCancel={onCancel} footer={false}>
+    <Modal
+      maskClosable={maskClosable}
+      centered
+      width={width}
+      open={open}
+      closeIcon={showCloseButton}
+      onOk={onOK}
+      onCancel={onCancel}
+      footer={false}
+    >
       {showHeader ? (
         customHeader ? (
           customHeader
@@ -57,10 +72,10 @@ const ModalCustom = ({
         ) : (
           <div className={cx("modal-footer")}>
             <Button type='primary' danger onClick={onCancel}>
-              Cancel
+              {cancelTitle}
             </Button>
             <Button type='primary' onClick={onOK} loading={isLoading}>
-              OK
+              {confirmTitle}
             </Button>
           </div>
         )

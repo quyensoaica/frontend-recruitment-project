@@ -23,7 +23,7 @@ const AccountMenu = () => {
     <div className={cx("account-menu-wrapper", "scrollbar")}>
       <div className={cx("user-info")}>
         <div className={cx("avatar")}>
-          <Avatar size='large' src=''>
+          <Avatar size='large' src={currentUser?.avatar ? currentUser.avatar : ""}>
             U
           </Avatar>
         </div>

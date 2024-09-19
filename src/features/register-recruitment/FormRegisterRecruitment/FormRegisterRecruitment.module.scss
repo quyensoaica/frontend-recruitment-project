@@ -120,16 +120,16 @@
     }
 
     .approve {
-      .description {
-        font-size: 2rem;
-        color: rgb(0, 230, 64);
-        font-weight: 600;
-      }
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
       gap: 10px;
+      .description {
+        font-size: 2rem;
+        color: rgb(0, 230, 64);
+        font-weight: 600;
+      }
     }
   }
 }

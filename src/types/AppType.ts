@@ -34,3 +34,11 @@ export interface ISelectOption {
   value: string;
   label: string;
 }
+
+export interface IUploadImageResponse {
+  public_id: string;
+  url: string;
+  secure_url: string;
+  display_name: string;
+  format: string;
+}
