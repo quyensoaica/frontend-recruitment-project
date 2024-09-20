@@ -1,11 +1,11 @@
 import React from "react";
-import style from "./ManagerLayout.module.scss";
+import style from "./RecruiterLayout.module.scss";
 import classNames from "classnames/bind";
 import { Outlet } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
-import { AdminHeader } from "../components/headers";
+import { RecruiterHeader } from "../components/headers";
 const cx = classNames.bind(style);
-const ManagerLayout: React.FC = () => {
+const RecruiterLayout: React.FC = () => {
   const [collapsed, setCollapsed] = React.useState(false);
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
@@ -13,7 +13,7 @@ const ManagerLayout: React.FC = () => {
   return (
     <div className={cx("wrapper")}>
       <div className={cx("header")}>
-        <AdminHeader toggleCollapsed={toggleCollapsed} />
+        <RecruiterHeader toggleCollapsed={toggleCollapsed} />
       </div>
       <div className={cx("body")}>
         <div
@@ -21,7 +21,7 @@ const ManagerLayout: React.FC = () => {
             close: collapsed,
           })}
         >
-          <Sidebar collapsed={collapsed} menuType='manager' />
+          <Sidebar collapsed={collapsed} menuType='recruiter' />
         </div>
         <div
           className={cx("content", "scrollbar", {
@@ -35,4 +35,4 @@ const ManagerLayout: React.FC = () => {
   );
 };
 
-export default ManagerLayout;
+export default RecruiterLayout;

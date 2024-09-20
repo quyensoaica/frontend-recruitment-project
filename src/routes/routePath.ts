@@ -18,6 +18,11 @@ enum ROUTE_PATH {
   ADMIN_SALARY_RANGES = "/admin/generals/manage-salary-ranges",
   ADMIN_MANAGE_COMPANY = "/admin/manage-company",
 
+  // recruiter routes
+  RECRUITER_DASHBOARD = "/recruiter/dashboard",
+  RECRUITER_COMPANY = "/recruiter/company",
+  RECRUITER_RECRUITMENT_NEW = "/recruiter/recruitment-news",
+
   // manager routes
   MANAGER_DASHBOARD = "/manager/dashboard",
   MANAGER_COMPANY = "/manager/company",

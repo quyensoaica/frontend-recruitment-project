@@ -1,10 +1,10 @@
 import { BiSolidBellRing, BiSolidMessage } from "react-icons/bi";
 import style from "./CandidateHeader.module.scss";
 import classNames from "classnames/bind";
-import { Avatar, Badge, Popover } from "antd";
-import AccountMenu from "../AccountMenu";
-import HeaderNotify from "../HeaderNotify";
-import HeaderMessage from "../HeaderMessage";
+import { Avatar, Badge, Col, Popover, Row } from "antd";
+import AccountMenu from "../../AccountMenu";
+import HeaderNotify from "../../HeaderNotify";
+import HeaderMessage from "../../HeaderMessage";
 import HeaderMenu from "./HeaderMenu";
 import { RootState } from "@/stores";
 import { useSelector } from "react-redux";
@@ -16,10 +16,21 @@ const CandidateHeader = () => {
     <div className={cx("header-wrapper")}>
       <div className={cx("header")}>
         <div className={cx("header-leftbox")}>
-          <div className={cx("logo-box")}>
-            <img className={cx("logo")} src='/src/assets/logo-full.png' alt='logo' />
-            <div className={cx("arrow")}></div>
-          </div>
+          <Row align='middle'>
+            <Col xs={0} sm={24}>
+              <div className={cx("logo-box")}>
+                <img className={cx("logo")} src='/src/assets/logo-full.png' alt='logo' />
+                <div className={cx("arrow")}></div>
+              </div>
+            </Col>
+            <Col xs={24} sm={0}>
+              <div className={cx("logo-box")}>
+                <div className='d-flex align-items-center'>
+                  <img className={cx("logo-less")} src='/src/assets/logo-less.png' alt='logo' />
+                </div>
+              </div>
+            </Col>
+          </Row>
           <div className={cx("menu-box")}>
             <HeaderMenu />
           </div>

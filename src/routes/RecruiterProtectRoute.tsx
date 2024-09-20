@@ -4,7 +4,7 @@ import ROUTE_PATH from "./routePath";
 import { toast } from "react-toastify";
 import React from "react";
 
-const AdminProtectRoute = (): JSX.Element => {
+const RecruiterProtectRoute = (): JSX.Element => {
   const navigate = useNavigate();
   const parseJwt = (token: any) => {
     try {
@@ -17,13 +17,12 @@ const AdminProtectRoute = (): JSX.Element => {
   if (!accessToken) return <Navigate to={ROUTE_PATH.LOGIN} />;
 
   const decodedToken = parseJwt(accessToken);
-  console.log(decodedToken);
   React.useEffect(() => {
-    if (decodedToken.roleName !== "admin") {
-      toast.info("Bạn không có quyền truy cập vào trang này!");
+    if (decodedToken.roleName === "candidate" || !decodedToken.isRecruiter) {
+      toast.info("Bạn không phải là nhà tuyển dụng, không thể truy cập vào trang này!");
       navigate(ROUTE_PATH.HOME);
     }
   }, [decodedToken]);
   return <Outlet />;
 };
-export default AdminProtectRoute;
+export default RecruiterProtectRoute;

@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import CandidateHeader from "../components/CandidateHeader";
+import CandidateHeader from "../components/headers/CandidateHeader";
 import style from "./CandidateLayout.module.scss";
 import classNames from "classnames/bind";
 const cx = classNames.bind(style);

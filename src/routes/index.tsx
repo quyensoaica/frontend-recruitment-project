@@ -21,6 +21,11 @@ import ManagerProtectRoute from "./ManagerProtectRoute";
 import ManageCompanyPage from "@/pages/manager/manager-company/ManagerCompanyPage";
 import ManagerDashboardPage from "@/pages/manager/dashboard/ManagerDashboardPage";
 import ManageCompanyAdminPage from "@/pages/admin/manage-company/ManageCompanyPage";
+import RecruiterLayout from "@/layouts/RecruiterLayout";
+import RecruiterDashboardPage from "@/pages/recruiter/dashboard/RecruiterDashboardPage";
+import MyCompanyPage from "@/pages/recruiter/my-company/MyCompanyPage";
+import RecruitmentNewsPage from "@/pages/recruiter/recruitment-news/RecruitmentNewsPage";
+import RecruiterProtectRoute from "./RecruiterProtectRoute";
 
 const AppRoute = () => {
   return (
@@ -47,6 +52,14 @@ const AppRoute = () => {
               {/* add other route of manager here */}
               <Route path={ROUTE_PATH.MANAGER_DASHBOARD} element={<ManagerDashboardPage />} />
               <Route path={ROUTE_PATH.MANAGER_COMPANY} element={<ManageCompanyPage />} />
+            </Route>
+          </Route>
+
+          <Route element={<RecruiterLayout />}>
+            <Route element={<RecruiterProtectRoute />}>
+              <Route path={ROUTE_PATH.RECRUITER_DASHBOARD} element={<RecruiterDashboardPage />} />
+              <Route path={ROUTE_PATH.RECRUITER_COMPANY} element={<MyCompanyPage />} />
+              <Route path={ROUTE_PATH.RECRUITER_RECRUITMENT_NEW} element={<RecruitmentNewsPage />} />
             </Route>
           </Route>
 

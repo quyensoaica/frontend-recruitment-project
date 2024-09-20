@@ -8,53 +8,41 @@ const recruiterMenu: MenuItem[] = [
   {
     key: "1",
     icon: <PieChartOutlined />,
-    label: "Dashboard",
-  },
-  {
-    key: "2",
-    icon: <ContainerOutlined />,
-    label: "Quản lý chung",
-    children: [
-      { key: "2.1", label: <Link to={ROUTE_PATH.ADMIN_PROFESSIONS}>Ngành nghề tuyển dụng</Link> },
-      { key: "2.2", label: <Link to={ROUTE_PATH.ADMIN_POSITIONS}>Vị trí tuyển dụng</Link> },
-      { key: "2.3", label: <Link to={ROUTE_PATH.ADMIN_EXPERIENCES}>Kinh nghiệm làm việc</Link> },
-      { key: "2.4", label: <Link to={ROUTE_PATH.ADMIN_SALARY_RANGES}>Mức lương</Link> },
-      { key: "2.6", label: <Link to={ROUTE_PATH.ADMIN_JOB_LOCATIONS}>Địa điểm làm việc</Link> },
-    ],
+    label: <Link to={ROUTE_PATH.RECRUITER_DASHBOARD}>Bảng tin</Link>,
   },
   {
     key: "3",
     icon: <DesktopOutlined />,
-    label: "Quản lý người dùng",
-    children: [
-      { key: "3.1", label: <Link to={ROUTE_PATH.ADMIN_ROLES}>Phân quyền người dùng</Link> },
-      { key: "3.2", label: <Link to={ROUTE_PATH.ADMIN_USERS}>Quản lý người dùng</Link> },
-    ],
-  },
-  {
-    key: "8",
-    label: "Quản lý công ty",
-    icon: <AppstoreOutlined />,
+    label: <Link to={ROUTE_PATH.RECRUITER_COMPANY}>Hồ sơ công ty</Link>,
   },
   {
     key: "4",
-    label: "Quản lý nhà tuyển dụng",
-    icon: <MailOutlined />,
+    icon: <AppstoreOutlined />,
+    label: <Link to={ROUTE_PATH.RECRUITER_RECRUITMENT_NEW}>Tin tuyển dụng</Link>,
   },
   {
     key: "5",
     label: "Quản lý ứng viên",
-    icon: <AppstoreOutlined />,
+    icon: <MailOutlined />,
   },
-
   {
     key: "6",
-    label: "Quản lý mẫu CV",
+    label: "Tìm kiếm hồ sơ",
     icon: <AppstoreOutlined />,
   },
   {
     key: "7",
-    label: "Quản lý bài tuyển dụng",
+    label: "Lịch sử hoạt động",
+    icon: <AppstoreOutlined />,
+  },
+  {
+    key: "8",
+    label: "Thông báo từ hệ thống",
+    icon: <AppstoreOutlined />,
+  },
+  {
+    key: "9",
+    label: "Hộp thư hỗ trợ",
     icon: <AppstoreOutlined />,
   },
 ];

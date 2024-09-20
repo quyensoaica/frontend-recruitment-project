@@ -1,18 +1,18 @@
 import { BsTextIndentLeft } from "react-icons/bs";
 import { BiSolidBellRing, BiSolidMessage } from "react-icons/bi";
-import style from "./AdminHeader.module.scss";
+import style from "./RecruiterHeader.module.scss";
 import classNames from "classnames/bind";
 import { Avatar, Badge, Dropdown, MenuProps, Popover } from "antd";
-import AccountMenu from "../AccountMenu";
-import HeaderNotify from "../HeaderNotify";
-import HeaderMessage from "../HeaderMessage";
+import AccountMenu from "../../AccountMenu";
+import HeaderNotify from "../../HeaderNotify";
+import HeaderMessage from "../../HeaderMessage";
 const cx = classNames.bind(style);
 
-interface IAdminHeaderProps {
+interface IRecruiterHeaderProps {
   toggleCollapsed: () => void;
 }
 
-const AdminHeader = ({ toggleCollapsed }: IAdminHeaderProps) => {
+const RecruiterHeader = ({ toggleCollapsed }: IRecruiterHeaderProps) => {
   return (
     <div className={cx("header-wrapper")}>
       <div className={cx("header")}>
@@ -49,4 +49,4 @@ const AdminHeader = ({ toggleCollapsed }: IAdminHeaderProps) => {
     </div>
   );
 };
-export default AdminHeader;
+export default RecruiterHeader;
