@@ -26,6 +26,7 @@ import RecruiterDashboardPage from "@/pages/recruiter/dashboard/RecruiterDashboa
 import MyCompanyPage from "@/pages/recruiter/my-company/MyCompanyPage";
 import RecruitmentNewsPage from "@/pages/recruiter/recruitment-news/RecruitmentNewsPage";
 import RecruiterProtectRoute from "./RecruiterProtectRoute";
+import CreateJobPage from "@/pages/recruiter/recruitment-news/CreateJob";
 
 const AppRoute = () => {
   return (
@@ -59,7 +60,10 @@ const AppRoute = () => {
             <Route element={<RecruiterProtectRoute />}>
               <Route path={ROUTE_PATH.RECRUITER_DASHBOARD} element={<RecruiterDashboardPage />} />
               <Route path={ROUTE_PATH.RECRUITER_COMPANY} element={<MyCompanyPage />} />
-              <Route path={ROUTE_PATH.RECRUITER_RECRUITMENT_NEW} element={<RecruitmentNewsPage />} />
+              <Route path={ROUTE_PATH.RECRUITER_RECRUITMENT_NEW}>
+                <Route path='' element={<RecruitmentNewsPage />} />
+                <Route path='create-job' element={<CreateJobPage />} />
+              </Route>
             </Route>
           </Route>
 

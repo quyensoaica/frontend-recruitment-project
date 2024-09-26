@@ -13,6 +13,7 @@ export interface CompanyState {
   openModalShowCompany: boolean;
   openModalApproveRegisterCompany: boolean;
   openModalRejectRegisterCompany: boolean;
+  openModalUpdateCompany: boolean;
 
   page?: number;
   limit?: number;
@@ -32,6 +33,7 @@ const initialState: CompanyState = {
   openModalShowCompany: false,
   openModalApproveRegisterCompany: false,
   openModalRejectRegisterCompany: false,
+  openModalUpdateCompany: false,
   page: 1,
   limit: 10,
   search: "",
@@ -58,6 +60,9 @@ export const CompanySlice = createSlice({
     },
     setOpenModalRejectRegisterCompany: (state, action: PayloadAction<boolean>) => {
       state.openModalRejectRegisterCompany = action.payload;
+    },
+    setOpenModalUpdateCompany: (state, action: PayloadAction<boolean>) => {
+      state.openModalUpdateCompany = action.payload;
     },
   },
   extraReducers: (builder) => {

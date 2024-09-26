@@ -1,5 +1,5 @@
 import ROUTE_PATH from "@/routes/routePath";
-import { AppstoreOutlined, ContainerOutlined, DesktopOutlined, MailOutlined, PieChartOutlined } from "@ant-design/icons";
+import { AppstoreOutlined, DesktopOutlined, MailOutlined, PieChartOutlined } from "@ant-design/icons";
 import { MenuProps } from "antd";
 import { Link } from "react-router-dom";
 type MenuItem = Required<MenuProps>["items"][number];

@@ -1,8 +1,6 @@
+import MyCompany from "@/features/my-company/MyCompany";
+
 const MyCompanyPage = () => {
-  return (
-    <div>
-      <h1>My Company</h1>
-    </div>
-  );
+  return <MyCompany />;
 };
 export default MyCompanyPage;

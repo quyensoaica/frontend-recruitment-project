@@ -2,8 +2,6 @@ import { IAppResposeBase, IFilterPayload } from "@/types/AppType";
 import { ICompany, IGetListCompanyResponse, IRegisterCompany } from "@/types/company/CompanyType";
 import http from "@/utils/axios/customAxios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { error } from "console";
-import { CompanyActions } from "./companyReducer";
 
 const registerCompanyByRecruiter = createAsyncThunk(
   "company/registerCompanyByRecruiter",
